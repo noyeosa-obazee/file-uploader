@@ -7,25 +7,76 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  password String
-  username String? @unique
-  files    File[]
-}
-
-model File {
-  id          Int     @id @default(autoincrement())
-  url         String
-  description String?
-  user        User    @relation(fields: [userId], references: [id])
-  userId      Int
-}
-
 model Session {
   id        String   @id
   sid       String   @unique
   data      String
   expiresAt DateTime
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  username String? @unique
+  password String
+  files    File[]
+}
+
+model File {
+  id         String   @id @default(uuid())
+  url        String
+  title      String?
+  uploadedAt DateTime @default(now())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model authors {
+  id    Int     @id @default(autoincrement())
+  name  String  @db.VarChar(255)
+  bio   String?
+  books books[]
+}
+
+model books {
+  id             Int      @id @default(autoincrement())
+  title          String   @db.VarChar(255)
+  price          Decimal? @db.Decimal(10, 2)
+  stock_quantity Int?     @default(0)
+  author_id      Int?
+  genre_id       Int?
+  authors        authors? @relation(fields: [author_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  genres         genres?  @relation(fields: [genre_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model genres {
+  id    Int     @id @default(autoincrement())
+  name  String  @db.VarChar(100)
+  books books[]
+}
+
+model messages {
+  id     Int     @id @default(autoincrement())
+  text   String?
+  sender String? @db.VarChar(255)
+  added  String?
+}
+
+model mo_posts {
+  post_id   Int       @id @default(autoincrement())
+  title     String    @db.VarChar(200)
+  timestamp DateTime? @default(now()) @db.Timestamp(6)
+  text      String
+  user_id   Int?
+  mo_users  mo_users? @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model mo_users {
+  id                Int        @id @default(autoincrement())
+  full_name         String     @db.VarChar(100)
+  username          String     @unique @db.VarChar(50)
+  password          String     @db.VarChar(100)
+  membership_status Boolean?   @default(false)
+  is_admin          Boolean?   @default(false)
+  mo_posts          mo_posts[]
 }

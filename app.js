@@ -3,15 +3,15 @@ import "dotenv/config";
 import express from "express";
 import session from "express-session";
 import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import path from "node:path";
-import { prisma } from "./lib/prisma";
+import { prisma } from "./lib/prisma.js";
+import indexRoute from "./routes/indexRouter.js";
+import { fileURLToPath } from "node:url";
 
 const app = express();
-
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -36,7 +36,7 @@ app.use(
 
 app.use(passport.session());
 
-//routes here
+app.use("/", indexRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

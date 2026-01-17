@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+</head>
+<body>
+
+  <h1>Create an Account</h1>
+
+  <% if (locals.error && locals.error.length > 0) { %>
+    <div style="color: red; border: 1px solid red; padding: 10px;">
+      <%= error %>
+    </div>
+  <% } %>
+
+  <form action="/sign-up" method="POST">
+    <div>
+      <label for="email">Email (Required)</label>
+      <input type="email" name="email" id="email" required>
+    </div>
+
+    <div>
+      <label for="username">Username (Optional)</label>
+      <input type="text" name="username" id="username">
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+    </div>
+
+    <div>
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" required>
+    </div>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <p>Already have an account? <a href="/">Log In</a></p>
+
+</body>
+</html>
