@@ -26,8 +26,8 @@
     <section class="upload-section">
       <h3>Upload New File</h3>
       <br>
-      <form action="/upload" method="POST" enctype="multipart/form-data" class="upload-form">
-        <input type="file" name="myFile" required>
+      <form action="/upload-file" method="POST" enctype="multipart/form-data" class="upload-form">
+        <input type="file" name="uploaded_file" required>
         <button type="submit" class="btn-primary">Upload Now</button>
       </form>
     </section>
@@ -44,9 +44,9 @@
             <div class="file-card">
               
               <div class="file-preview">
-                <% if (file.mimeType.startsWith('image/')) { %>
+                <% if (file.fileType.startsWith('image/')) { %>
                   <img src="<%= file.filepath %>" alt="<%= file.originalName %>">
-                <% } else if (file.mimeType === 'application/pdf') { %>
+                <% } else if (file.fileType === 'application/pdf') { %>
                   <span>📄</span> 
                 <% } else { %>
                   <span>📁</span>
@@ -56,12 +56,13 @@
               <div class="file-info">
                 <div class="file-name"><%= file.originalName %></div>
                 <div class="file-meta">
-                  <%= (file.size / 1024).toFixed(1) %> KB • <%= new Date(file.createdAt).toLocaleDateString() %>
+                  <%= (file.size / 1024).toFixed(1) %> KB • <%= formatDate(file.uploadedAt) %>
                 </div>
                 
                 <div class="file-actions">
                   <a href="<%= file.filepath %>" download class="btn-link">Download</a>
                   <a href="<%= file.filepath %>" target="_blank" class="btn-link">View</a>
+                   <a href="<%= file.filepath %>" target="_blank" class="btn-link delete-btn">Delete</a>
                 </div>
               </div>
 

@@ -1,5 +1,6 @@
 import { prisma } from "../lib/prisma.js";
 import bcrypt from "bcryptjs";
+import { format } from "date-fns";
 
 const getSignUpForm = (req, res) => {
   res.render("sign-up");
@@ -44,14 +45,18 @@ const getFileUpload = (req, res) => {
 };
 
 const uploadFile = async (req, res) => {
+  const fixedOriginalName = Buffer.from(
+    req.file.originalname,
+    "latin1",
+  ).toString("utf8");
   try {
     await prisma.file.create({
       data: {
         url: req.file.path,
         title: req.body.title || null,
-        fileName: req.file.fileName,
-        originalName: req.file.originalname,
-        fileType: req.file.miemetype,
+        fileName: req.file.filename,
+        originalName: fixedOriginalName,
+        fileType: req.file.mimetype,
         size: req.file.size,
         userId: req.user.id,
       },
@@ -68,7 +73,14 @@ const displayDashboard = async (req, res) => {
     where: { id: req.user.id },
     include: { files: true },
   });
-  res.render("dashboard", { user: userWithFiles });
+  res.render("dashboard", {
+    user: userWithFiles,
+    formatDate: (date) => {
+      if (!date) return "Unknown Date";
+
+      return format(new Date(date), "MMM dd, yyyy");
+    },
+  });
 };
 
 export {

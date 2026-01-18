@@ -30,6 +30,7 @@ body { background-color: var(--bg-light); color: var(--text-dark); } */
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  padding-top: 100px;
 }
 
 .navbar {
@@ -46,6 +47,7 @@ body { background-color: var(--bg-light); color: var(--text-dark); } */
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 1000;
 }
 
 .nav-brand {
@@ -61,7 +63,7 @@ body { background-color: var(--bg-light); color: var(--text-dark); } */
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 24px; /* Space between links */
+  gap: 24px;
 }
 
 .nav-link {
@@ -97,6 +99,10 @@ h1 {
   color: var(--danger);
   text-decoration: none;
   font-weight: bold;
+}
+
+.btn-link.delete-btn {
+  color: red;
 }
 
 .upload-section {
@@ -135,7 +141,7 @@ button.btn-primary:hover {
 
 .files-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1.5rem;
 }
 
