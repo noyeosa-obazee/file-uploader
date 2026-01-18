@@ -16,14 +16,14 @@
       <div class="error-msg"><%= error %></div>
     <% } %>
 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
+    <form action="/upload-file" method="POST" enctype="multipart/form-data">
       
       <div class="form-group">
         <label for="title">Title (Optional)</label>
         <input type="text" name="title" id="title" placeholder="e.g. My Resume">
       </div>
 
-      <div class="form-group">
+      <div>
         <label for="uploaded_file">Select File</label>
         <input type="file" name="uploaded_file" id="uploaded_file" required>
       </div>

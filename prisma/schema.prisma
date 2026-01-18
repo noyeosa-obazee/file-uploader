@@ -23,12 +23,16 @@ model User {
 }
 
 model File {
-  id         String   @id @default(uuid())
-  url        String
-  title      String?
-  uploadedAt DateTime @default(now())
-  userId     Int
-  user       User     @relation(fields: [userId], references: [id])
+  id           String   @id @default(uuid())
+  url          String
+  title        String?
+  fileName     String
+  originalName String
+  fileType     String
+  size         Int
+  uploadedAt   DateTime @default(now())
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
 }
 
 model authors {

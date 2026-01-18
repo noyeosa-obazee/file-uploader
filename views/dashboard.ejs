@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+  
+<nav class="navbar">
+  <a href="/dashboard" class="nav-brand">
+    <span>📂</span> FileX
+  </a>
+
+  <div class="nav-menu">
+    <span class="user-email">Hi, <%= user.email %></span>
+    
+    <!-- <a href="/dashboard" class="nav-link">Home</a> -->
+    <a href="/logout" class="nav-link btn-logout">Log Out</a>
+  </div>
+</nav>
+    <section class="upload-section">
+      <h3>Upload New File</h3>
+      <br>
+      <form action="/upload" method="POST" enctype="multipart/form-data" class="upload-form">
+        <input type="file" name="myFile" required>
+        <button type="submit" class="btn-primary">Upload Now</button>
+      </form>
+    </section>
+
+    <section>
+      <h2 style="margin-bottom: 1rem;">Your Files (<%= user.files.length %>)</h2>
+      
+      <% if (user.files.length === 0) { %>
+        <p style="color: #6b7280;">No files uploaded yet.</p>
+      <% } else { %>
+        
+        <div class="files-grid">
+          <% user.files.forEach(file => { %>
+            <div class="file-card">
+              
+              <div class="file-preview">
+                <% if (file.mimeType.startsWith('image/')) { %>
+                  <img src="<%= file.filepath %>" alt="<%= file.originalName %>">
+                <% } else if (file.mimeType === 'application/pdf') { %>
+                  <span>📄</span> 
+                <% } else { %>
+                  <span>📁</span>
+                <% } %>
+              </div>
+
+              <div class="file-info">
+                <div class="file-name"><%= file.originalName %></div>
+                <div class="file-meta">
+                  <%= (file.size / 1024).toFixed(1) %> KB • <%= new Date(file.createdAt).toLocaleDateString() %>
+                </div>
+                
+                <div class="file-actions">
+                  <a href="<%= file.filepath %>" download class="btn-link">Download</a>
+                  <a href="<%= file.filepath %>" target="_blank" class="btn-link">View</a>
+                </div>
+              </div>
+
+            </div>
+          <% }) %>
+        </div>
+
+      <% } %>
+    </section>
+
+  </div>
+
+</body>
+</html>

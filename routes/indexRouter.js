@@ -1,6 +1,9 @@
 import { Router } from "express";
 import * as ctrl from "../controllers/appControllers.js";
 import passport from "passport";
+import multer from "multer";
+const upload = multer({ dest: "../uploads/" });
+
 const indexRoute = Router();
 
 indexRoute.get("/sign-up", ctrl.getSignUpForm);
@@ -9,12 +12,17 @@ indexRoute.get("/log-in", ctrl.getLogInForm);
 indexRoute.post(
   "/log-in",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/dashboard",
     failureRedirect: "/log-in",
   }),
 );
 indexRoute.get("/upload-file", ctrl.isAuth, ctrl.getFileUpload);
-indexRoute.post("/upload-file", ctrl.isAuth, ctrl.uploadFile);
-indexRoute.get("/", ctrl.isAuth, (req, res) => res.send("You are in!"));
+indexRoute.post(
+  "/upload-file",
+  ctrl.isAuth,
+  upload.single("uploaded_file"),
+  ctrl.uploadFile,
+);
+indexRoute.get("/dashboard", ctrl.isAuth, ctrl.displayDashboard);
 
 export default indexRoute;

@@ -21,7 +21,7 @@ const signUp = async (req, res) => {
       },
     });
 
-    res.redirect("/");
+    res.redirect("/dashboard");
   } catch (err) {
     console.error(err);
   }
@@ -43,7 +43,33 @@ const getFileUpload = (req, res) => {
   res.render("file-upload");
 };
 
-const uploadFile = async (req, res) => {};
+const uploadFile = async (req, res) => {
+  try {
+    await prisma.file.create({
+      data: {
+        url: req.file.path,
+        title: req.body.title || null,
+        fileName: req.file.fileName,
+        originalName: req.file.originalname,
+        fileType: req.file.miemetype,
+        size: req.file.size,
+        userId: req.user.id,
+      },
+    });
+
+    res.redirect("/dashboard");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const displayDashboard = async (req, res) => {
+  const userWithFiles = await prisma.user.findUnique({
+    where: { id: req.user.id },
+    include: { files: true },
+  });
+  res.render("dashboard", { user: userWithFiles });
+};
 
 export {
   getSignUpForm,
@@ -52,4 +78,5 @@ export {
   isAuth,
   getFileUpload,
   uploadFile,
+  displayDashboard,
 };
