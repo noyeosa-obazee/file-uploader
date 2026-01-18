@@ -11,7 +11,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -22,6 +22,16 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+}
+
+body.dashboard {
+  display: block;
+}
+
+.upload-sec-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* 
 body { background-color: var(--bg-light); color: var(--text-dark); } */
@@ -141,7 +151,7 @@ button.btn-primary:hover {
 
 .files-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 1.5rem;
 }
 
