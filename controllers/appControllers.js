@@ -27,4 +27,29 @@ const signUp = async (req, res) => {
   }
 };
 
-export { getSignUpForm, signUp };
+const getLogInForm = (req, res) => {
+  res.render("log-in");
+};
+
+const isAuth = (req, res, next) => {
+  if (req.user.id) {
+    next();
+  } else {
+    res.redirect("/log-in");
+  }
+};
+
+const getFileUpload = (req, res) => {
+  res.render("file-upload");
+};
+
+const uploadFile = async (req, res) => {};
+
+export {
+  getSignUpForm,
+  signUp,
+  getLogInForm,
+  isAuth,
+  getFileUpload,
+  uploadFile,
+};

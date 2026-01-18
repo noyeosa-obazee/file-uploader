@@ -3,6 +3,7 @@ import "dotenv/config";
 import express from "express";
 import session from "express-session";
 import passport from "passport";
+import "./config/passport.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import path from "node:path";
 import { prisma } from "./lib/prisma.js";
