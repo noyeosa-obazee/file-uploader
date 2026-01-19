@@ -50,10 +50,11 @@ const uploadFile = async (req, res) => {
     req.file.originalname,
     "latin1",
   ).toString("utf8");
+  const webPath = `/uploads/${req.file.filename}`;
   try {
     await prisma.file.create({
       data: {
-        url: req.file.path,
+        url: webPath,
         title: req.body.title || null,
         fileName: req.file.filename,
         originalName: fixedOriginalName,
@@ -116,7 +117,12 @@ const viewFolder = async (req, res) => {
   res.render("dashboard", {
     user: req.user,
     currentFolder: folder,
-    files: folder.files,
+    files: folderId ? folder.files : req.user.files,
+    formatDate: (date) => {
+      if (!date) return "Unknown Date";
+
+      return format(new Date(date), "MMM dd, yyyy");
+    },
   });
 };
 

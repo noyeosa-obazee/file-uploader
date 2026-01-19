@@ -48,7 +48,7 @@
       </form>
     <% } %>
 
-    <form action="/upload" method="POST" enctype="multipart/form-data" style="display: flex; gap: 5px; align-items: center;">
+    <form action="/upload-file" method="POST" enctype="multipart/form-data" style="display: flex; gap: 5px; align-items: center;">
       <input type="hidden" name="folderId" value="<%= currentFolder ? currentFolder.id : '' %>">
       
       <input type="file" name="uploaded_file" required class="mini-input" style="background: white;">
@@ -102,17 +102,17 @@
   </h3>
      
       
-      <% if (!user.files || user.files.length === 0) { %>
+      <% if (!files || files.length === 0) { %>
         <p style="color: #6b7280;">No files uploaded yet.</p>
       <% } else { %>
         
         <div class="files-grid">
-          <% user.files.forEach(file => { %>
+          <% files.forEach(file => { %>
             <div class="file-card">
               
               <div class="file-preview">
                 <% if (file.fileType.startsWith('image/')) { %>
-                  <img src="<%= file.filepath %>" alt="<%= file.originalName %>">
+                  <img src="<%= file.url %>" alt="<%= file.originalName %>">
                 <% } else if (file.fileType === 'application/pdf') { %>
                   <span>📄</span> 
                 <% } else { %>

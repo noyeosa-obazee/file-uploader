@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as ctrl from "../controllers/appControllers.js";
 import passport from "passport";
 import multer from "multer";
-const upload = multer({ dest: "../uploads/" });
+const upload = multer({ dest: "./public/uploads/" });
 
 const indexRoute = Router();
 
