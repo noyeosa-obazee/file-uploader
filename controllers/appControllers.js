@@ -40,10 +40,6 @@ const isAuth = (req, res, next) => {
   }
 };
 
-const getFileUpload = (req, res) => {
-  res.render("file-upload");
-};
-
 const uploadFile = async (req, res) => {
   const folderId = req.body.folderId ? parseInt(req.body.folderId) : null;
   const fixedOriginalName = Buffer.from(
@@ -131,7 +127,6 @@ export {
   signUp,
   getLogInForm,
   isAuth,
-  getFileUpload,
   uploadFile,
   displayDashboard,
   createFolder,

@@ -16,7 +16,7 @@ indexRoute.post(
     failureRedirect: "/log-in",
   }),
 );
-indexRoute.get("/upload-file", ctrl.isAuth, ctrl.getFileUpload);
+
 indexRoute.post(
   "/upload-file",
   ctrl.isAuth,
