@@ -1,6 +1,12 @@
 import { prisma } from "../lib/prisma.js";
 import bcrypt from "bcryptjs";
 import { format } from "date-fns";
+import path from "node:path";
+
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const getSignUpForm = (req, res) => {
   res.render("sign-up");
@@ -122,6 +128,23 @@ const viewFolder = async (req, res) => {
   });
 };
 
+const downloadFile = async (req, res) => {
+  const fileId = req.params.fileId;
+
+  const file = await prisma.file.findUnique({
+    where: { id: fileId },
+  });
+  const filename = file.url.split("/").pop();
+
+  const filePath = path.join(__dirname, "../public/uploads", filename);
+
+  res.download(filePath, file.originalName, (err) => {
+    if (err) {
+      console.error("Download error:", err);
+    }
+  });
+};
+
 export {
   getSignUpForm,
   signUp,
@@ -131,4 +154,5 @@ export {
   displayDashboard,
   createFolder,
   viewFolder,
+  downloadFile,
 };

@@ -26,5 +26,6 @@ indexRoute.post(
 indexRoute.get("/dashboard", ctrl.isAuth, ctrl.displayDashboard);
 indexRoute.get("/folder/:id", ctrl.viewFolder);
 indexRoute.post("/folder", ctrl.createFolder);
+indexRoute.get("/file/:fileId/download", ctrl.downloadFile);
 
 export default indexRoute;
