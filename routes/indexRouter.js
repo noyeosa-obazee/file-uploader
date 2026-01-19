@@ -27,6 +27,6 @@ indexRoute.get("/dashboard", ctrl.isAuth, ctrl.displayDashboard);
 indexRoute.get("/folder/:id", ctrl.viewFolder);
 indexRoute.post("/folder", ctrl.createFolder);
 indexRoute.get("/file/:fileId/download", ctrl.downloadFile);
-indexRoute.get("/file/:fileId/delete", ctrl.deleteFile);
+indexRoute.post("/file/:fileId/delete", ctrl.deleteFile);
 
 export default indexRoute;
