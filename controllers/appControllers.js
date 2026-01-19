@@ -145,6 +145,20 @@ const downloadFile = async (req, res) => {
   });
 };
 
+const deleteFile = async (req, res) => {
+  try {
+    const fileId = req.params.fileId;
+
+    await prisma.file.delete({
+      where: { id: fileId },
+    });
+
+    res.redirect("/dashboard");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export {
   getSignUpForm,
   signUp,
@@ -155,4 +169,5 @@ export {
   createFolder,
   viewFolder,
   downloadFile,
+  deleteFile,
 };
