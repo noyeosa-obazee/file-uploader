@@ -298,3 +298,115 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 1.5rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.breadcrumbs {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: var(--text-gray);
+  transition: color 0.2s;
+}
+.breadcrumbs a:hover {
+  color: var(--primary);
+}
+
+.current-path {
+  color: var(--text-dark);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.header-actions form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.header-actions input[type="text"],
+.header-actions input[type="file"],
+.header-actions button {
+  height: 40px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.header-actions input[type="text"] {
+  margin: 0;
+  padding: 0 12px;
+  line-height: 40px;
+}
+
+.header-actions input[type="file"] {
+  padding: 5px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 16px;
+}
+
+.mini-input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.btn-upload {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-upload:hover {
+  background-color: #4338ca;
+}
+
+.btn-create {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  color: var(--text-dark);
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-create:hover {
+  background-color: #f3f4f6;
+}

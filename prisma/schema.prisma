@@ -15,11 +15,12 @@ model Session {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  username String? @unique
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  username String?  @unique
   password String
   files    File[]
+  folders  Folder[]
 }
 
 model File {
@@ -33,6 +34,17 @@ model File {
   uploadedAt   DateTime @default(now())
   userId       Int
   user         User     @relation(fields: [userId], references: [id])
+  folderId     Int?
+  folder       Folder?  @relation(fields: [folderId], references: [id])
+}
+
+model Folder {
+  id        Int      @id @default(autoincrement())
+  name      String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  files     File[]
+  createdAt DateTime @default(now())
 }
 
 model authors {

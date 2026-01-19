@@ -24,5 +24,7 @@ indexRoute.post(
   ctrl.uploadFile,
 );
 indexRoute.get("/dashboard", ctrl.isAuth, ctrl.displayDashboard);
+indexRoute.get("/folder/:id", ctrl.viewFolder);
+indexRoute.post("/folder", ctrl.createFolder);
 
 export default indexRoute;
