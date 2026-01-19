@@ -44,7 +44,7 @@
     <% if (!currentFolder) { %>
       <form action="/folder" method="POST" style="display: flex; gap: 5px;">
         <input type="text" name="folderName" placeholder="New Folder..." class="mini-input" required>
-        <button type="submit" class="btn-create">+ Create</button>
+        <button type="submit" class="btn-create">+ Create Folder</button>
       </form>
     <% } %>
 
@@ -85,7 +85,9 @@
 
           <div class="file-actions">
                   <a href="/folder/<%=folder.id%>" class="btn-link">Open</a>
-                   <a href="#" target="_blank" class="btn-link delete-btn">Delete</a>
+                   <form action="/folder/<%= folder.id %>/delete" method="POST" style="display: inline;">
+     <button type="submit" class="btn-link delete-btn">Delete</button>
+</form>
                 </div>
         
         </div>
@@ -129,7 +131,10 @@
                 <div class="file-actions">
                   <a href="/file/<%= file.id %>/download" download class="btn-link">Download</a>
                   <a href="<%= file.filepath %>" target="_blank" class="btn-link">View</a>
-                   <a href="/file/<%= file.id %>/delete" class="btn-link delete-btn">Delete</a>
+                  <form action="/file/<%= file.id %>/delete" method="POST" style="display: inline;">
+     <button type="submit" class="btn-link delete-btn">Delete</button>
+</form>
+                   
                 </div>
               </div>
 

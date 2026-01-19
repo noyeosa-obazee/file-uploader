@@ -2,6 +2,7 @@ import { prisma } from "../lib/prisma.js";
 import bcrypt from "bcryptjs";
 import { format } from "date-fns";
 import path from "node:path";
+import fs from "fs";
 
 import { fileURLToPath } from "url";
 
@@ -146,8 +147,19 @@ const downloadFile = async (req, res) => {
 };
 
 const deleteFile = async (req, res) => {
+  const fileId = req.params.fileId;
+  const file = await prisma.file.findUnique({
+    where: { id: fileId },
+  });
+  const filename = file.url.split("/").pop();
+  const filePath = path.join(__dirname, "../public/uploads", filename);
+
   try {
-    const fileId = req.params.fileId;
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error("Error deleting file from disk:", err.message);
+      }
+    });
 
     await prisma.file.delete({
       where: { id: fileId },

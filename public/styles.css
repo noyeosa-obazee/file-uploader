@@ -24,6 +24,10 @@ body {
   min-height: 100vh;
 }
 
+input {
+  font-weight: 500;
+}
+
 body.dashboard {
   display: block;
 }
@@ -163,6 +167,7 @@ button.btn-primary:hover {
   transition: transform 0.2s;
   display: flex;
   flex-direction: column;
+  font-weight: 500;
 }
 
 .file-card:hover {
@@ -206,7 +211,17 @@ button.btn-primary:hover {
   margin-top: auto;
   padding-top: 10px;
   display: flex;
+  align-items: center;
   gap: 10px;
+}
+
+.file-actions form {
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  vertical-align: middle;
+  display: contents;
+  margin-top: -2px;
 }
 
 .btn-link {
@@ -214,7 +229,19 @@ button.btn-primary:hover {
   font-size: 0.85rem;
   color: var(--primary);
 }
+.delete-btn {
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  color: red;
+  background: none;
+}
 
+.delete-btn:hover {
+  color: red;
+  background: none;
+  text-decoration: underline;
+}
 .form-container {
   background: white;
   padding: 2rem;
@@ -404,7 +431,7 @@ a:hover {
   color: var(--text-dark);
   padding: 9px 16px;
   border-radius: 6px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
 }
 .btn-create:hover {
