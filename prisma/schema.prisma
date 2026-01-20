@@ -15,36 +15,55 @@ model Session {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
-  username String?  @unique
-  password String
-  files    File[]
-  folders  Folder[]
+  id         Int         @id @default(autoincrement())
+  email      String      @unique
+  username   String?     @unique
+  password   String
+  files      File[]
+  folders    Folder[]
+  shareLinks ShareLink[]
 }
 
 model File {
-  id           String   @id @default(uuid())
+  id           String      @id @default(uuid())
   url          String
   title        String?
   publicId     String
   originalName String
   fileType     String
   size         Int
-  uploadedAt   DateTime @default(now())
+  uploadedAt   DateTime    @default(now())
   userId       Int
-  user         User     @relation(fields: [userId], references: [id])
+  user         User        @relation(fields: [userId], references: [id])
   folderId     Int?
-  folder       Folder?  @relation(fields: [folderId], references: [id])
+  folder       Folder?     @relation(fields: [folderId], references: [id])
+  shareLinks   ShareLink[]
 }
 
 model Folder {
-  id        Int      @id @default(autoincrement())
-  name      String
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  files     File[]
+  id         Int         @id @default(autoincrement())
+  name       String
+  userId     Int
+  user       User        @relation(fields: [userId], references: [id])
+  files      File[]
+  createdAt  DateTime    @default(now())
+  shareLinks ShareLink[]
+}
+
+model ShareLink {
+  id        String   @id @default(uuid())
+  token     String   @unique @default(uuid())
+  expiresAt DateTime
   createdAt DateTime @default(now())
+
+  fileId String?
+  file   File?   @relation(fields: [fileId], references: [id])
+
+  folderId Int?
+  folder   Folder? @relation(fields: [folderId], references: [id])
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 }
 
 model authors {

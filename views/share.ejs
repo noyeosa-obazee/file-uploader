@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Share Content</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Share "<%= item.name %>"</h2>
+
+      <form action="/share/generate" method="POST">
+        <input type="hidden" name="itemId" value="<%= item.id %>" />
+        <input type="hidden" name="type" value="<%= type %>" />
+        <div class="form-group">
+          <label>Link Duration:</label>
+          <select name="duration" required>
+            <option value="1">1 Hour</option>
+            <option value="24">1 Day</option>
+            <option value="168">7 Days</option>
+            <option value="0">No Expiration (Permanent)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary">Generate Link</button>
+        <a href="/dashboard" class="btn-cancel">Cancel</a>
+      </form>
+    </div>
+  </body>
+</html>

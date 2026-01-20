@@ -85,6 +85,7 @@
 
           <div class="file-actions">
                   <a href="/folder/<%=folder.id%>" class="btn-link">Open</a>
+                  <a href="/share/folder/<%= folder.id %>" class="btn-link btn-share">Share</a>
                    <form action="/folder/<%= folder.id %>/delete" method="POST" style="display: inline;" onsubmit='return confirm("⚠️ WARNING: This will delete the folder AND all the files inside it. Are you sure?");'>
      <button type="submit" class="btn-link delete-btn">Delete</button>
 </form>
@@ -131,6 +132,7 @@
                 <div class="file-actions">
                   <a href="/file/<%= file.id %>/download" download class="btn-link">Download</a>
                   <a href="<%= file.url %>" target="_blank" class="btn-link">View</a>
+                  <a href="/share/file/<%= file.id %>" class="btn-link btn-share">Share</a>
                   <form action="/file/<%= file.id %>/delete" method="POST" style="display: inline;">
                      <input type="hidden" name="folderId" value="<%= currentFolder ? currentFolder.id : '' %>">
      <button type="submit" class="btn-link delete-btn">Delete</button>

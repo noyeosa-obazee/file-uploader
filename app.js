@@ -8,6 +8,7 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import path from "node:path";
 import { prisma } from "./lib/prisma.js";
 import indexRoute from "./routes/indexRouter.js";
+import shareRoute from "./routes/shareRouter.js";
 import { fileURLToPath } from "node:url";
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(
 app.use(passport.session());
 
 app.use("/", indexRoute);
+app.use("/share", shareRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= file.originalName %> - Shared File</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <link rel="stylesheet" href="/styles.css">
+    
+    <style>
+        
+        .single-file-container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .file-preview-large {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 200px;
+        }
+
+        .file-preview-large img {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .file-icon-large {
+            font-size: 5rem;
+        }
+
+        .meta-info {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .btn-download-large {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-download-large:hover {
+            background-color: #0056b3;
+        }
+
+        .meta-info {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="single-file-container">
+        
+        <h1><%= file.originalName %></h1>
+        <div class="meta-info">
+            Shared by <strong><%= owner %></strong> • 
+            <%= (file.size / 1024).toFixed(2) %> KB
+        </div>
+
+        <div class="file-preview-large">
+            <% if (file.url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) { %>
+                <img src="<%= file.url %>" alt="Preview">
+            
+            <% } else if (file.url.endsWith('.pdf')) { %>
+                <div class="file-icon-large">📄</div>
+            
+            <% } else { %>
+                <div class="file-icon-large">📦</div>
+            <% } %>
+        </div>
+
+        <% 
+           
+            const safeName = file.originalName.split('.')[0];
+            
+            
+            const downloadUrl = file.url.replace(
+                '/upload/', 
+                `/upload/fl_attachment:${safeName}/`
+            );
+        %>
+
+        <a href="<%= downloadUrl %>" class="btn-download-large">
+            Download File
+        </a>
+
+        <p style="margin-top: 20px; font-size: 0.8rem; color: #999;">
+            Link expires automatically.
+        </p>
+
+    </div>
+
+</body>
+</html>
