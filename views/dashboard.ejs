@@ -85,7 +85,7 @@
 
           <div class="file-actions">
                   <a href="/folder/<%=folder.id%>" class="btn-link">Open</a>
-                   <form action="/folder/<%= folder.id %>/delete" method="POST" style="display: inline;">
+                   <form action="/folder/<%= folder.id %>/delete" method="POST" style="display: inline;" onsubmit='return confirm("⚠️ WARNING: This will delete the folder AND all the files inside it. Are you sure?");'>
      <button type="submit" class="btn-link delete-btn">Delete</button>
 </form>
                 </div>
