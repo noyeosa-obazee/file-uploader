@@ -171,6 +171,47 @@ const deleteFile = async (req, res) => {
   }
 };
 
+const deleteFolder = async (req, res) => {
+  const folderId = parseInt(req.params.folderId);
+
+  try {
+    const folder = await prisma.folder.findUnique({
+      where: { id: folderId },
+      include: { files: true },
+    });
+
+    folder.files.forEach((file) => {
+      const filename = file.url.split("/").pop();
+      const filePath = path.join(__dirname, "../public/uploads", filename);
+
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error(
+            `Warning: Could not delete ${filename} from disk:`,
+            err.message,
+          );
+        } else {
+          console.log(`Deleted file: ${filename}`);
+        }
+      });
+    });
+
+    await prisma.$transaction([
+      prisma.file.deleteMany({
+        where: { folderId: folderId },
+      }),
+
+      prisma.folder.delete({
+        where: { id: folderId },
+      }),
+    ]);
+
+    res.redirect("/dashboard");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export {
   getSignUpForm,
   signUp,
@@ -182,4 +223,5 @@ export {
   viewFolder,
   downloadFile,
   deleteFile,
+  deleteFolder,
 };
