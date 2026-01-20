@@ -11,15 +11,17 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div class="container">
-      <h2>Share "<%= item.name %>"</h2>
-
+    <div class="form-container">
+      <h2>
+        Share "<%= item.type === "folder" ? item.name : item.originalName %>"
+      </h2>
+      <br />
       <form action="/share/generate" method="POST">
         <input type="hidden" name="itemId" value="<%= item.id %>" />
         <input type="hidden" name="type" value="<%= type %>" />
         <div class="form-group">
           <label>Link Duration:</label>
-          <select name="duration" required>
+          <select name="duration" required class="form-select">
             <option value="1">1 Hour</option>
             <option value="24">1 Day</option>
             <option value="168">7 Days</option>
@@ -28,7 +30,9 @@
         </div>
 
         <button type="submit" class="btn-primary">Generate Link</button>
-        <a href="/dashboard" class="btn-cancel">Cancel</a>
+        <br />
+        <br />
+        <small><a href="/dashboard" class="btn-cancel">Go Back</a></small>
       </form>
     </div>
   </body>

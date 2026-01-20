@@ -71,6 +71,10 @@
         .meta-info {
             font-weight: 500;
         }
+
+        .bold {
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -109,6 +113,9 @@
         <a href="<%= downloadUrl %>" class="btn-download-large">
             Download File
         </a>
+        <br>
+        
+        <a href="<%= file.url %>" class="btn-link bold" target="_blank">View</a>
 
         <p style="margin-top: 20px; font-size: 0.8rem; color: #999;">
             Link expires automatically.

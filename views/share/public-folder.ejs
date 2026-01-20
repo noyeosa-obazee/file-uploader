@@ -17,27 +17,34 @@
         
         .public-container { max-width: 900px; margin: 40px auto; padding: 20px; }
         .header { text-align: center; margin-bottom: 40px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
         .card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; background: white; }
         .btn-download { display: block; margin-top: 10px; background: #007bff; color: white; text-decoration: none; padding: 5px; border-radius: 4px; }
         .btn-download:hover { background: #0056b3; }
          .meta-info {
             font-weight: 500;
         }
+
+        small {
+            font-weight: 500;
+        }
+        .bold {
+            font-weight: 500;
+        }
     </style>
 </head>
-<body>
+<body class="dashboard">
 
     <div class="public-container">
         
         <div class="header">
             <h1>📂 <%= folder.name %></h1>
             <p class="meta-info">Shared by <strong><%= owner %></strong></p>
-            <small>This link is temporary and read-only.</small>
+           
         </div>
-
+ 
         <div class="grid">
-            
+           
             <% files.forEach(file => { %>
                 
                 <% 
@@ -55,11 +62,13 @@
                         <%= file.originalName %>
                     </div>
                     
-                    <div style="color: #666; font-size: 0.8rem; margin-bottom: 10px;">
+                    <div style="color: #666; font-size: 0.8rem; margin-bottom: 10px; font-weight: 500;">
                         <%= (file.size / 1024).toFixed(1) %> KB
                     </div>
-
-                    <a href="<%= downloadUrl %>" class="btn-download">Download</a>
+<div class="file-actions">
+                    <a href="<%= downloadUrl %>" class="btn-link bold">Download</a>
+                    <a href="<%= file.url %>" target="_blank" class="btn-link bold">View</a>
+                    </div>
                 </div>
 
             <% }) %>
