@@ -27,7 +27,7 @@ model File {
   id           String   @id @default(uuid())
   url          String
   title        String?
-  fileName     String
+  publicId     String
   originalName String
   fileType     String
   size         Int
