@@ -137,9 +137,11 @@ const downloadFile = async (req, res) => {
     where: { id: fileId },
   });
   const fileNameNoExt = file.originalName.split(".").slice(0, -1).join(".");
+
+  const safeName = encodeURIComponent(fileNameNoExt);
   const downloadUrl = file.url.replace(
     "/upload/",
-    `/upload/fl_attachment:${fileNameNoExt}/`,
+    `/upload/fl_attachment:${safeName}/`,
   );
   res.redirect(downloadUrl);
 };
