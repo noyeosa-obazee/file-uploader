@@ -48,11 +48,11 @@
       </form>
     <% } %>
 
-    <form action="/upload-file" method="POST" enctype="multipart/form-data" style="display: flex; gap: 5px; align-items: center;">
+    <form action="/upload-file" id="uploadForm" method="POST" enctype="multipart/form-data" style="display: flex; gap: 5px; align-items: center;">
       <input type="hidden" name="folderId" value="<%= currentFolder ? currentFolder.id : '' %>">
       <input type="hidden" name="folderName" value="<%= currentFolder ? currentFolder.name : '' %>">
       <input type="file" name="uploaded_file" required class="mini-input" style="background: white;">
-      <button type="submit" class="btn-upload">
+      <button type="submit" class="btn-upload" id="uploadBtn"> 
         <span>⬆</span> Upload
       </button>
     </form>
@@ -130,7 +130,7 @@
                 
                 <div class="file-actions">
                   <a href="/file/<%= file.id %>/download" download class="btn-link">Download</a>
-                  <a href="<%= file.filepath %>" target="_blank" class="btn-link">View</a>
+                  <a href="<%= file.url %>" target="_blank" class="btn-link">View</a>
                   <form action="/file/<%= file.id %>/delete" method="POST" style="display: inline;">
                      <input type="hidden" name="folderId" value="<%= currentFolder ? currentFolder.id : '' %>">
      <button type="submit" class="btn-link delete-btn">Delete</button>
@@ -147,6 +147,21 @@
     </section>
 
   </div>
+<script>
+  const uploadForm = document.getElementById('uploadForm');
+  const uploadBtn = document.getElementById('uploadBtn');
 
+  uploadForm.addEventListener('submit', () => {
+    
+    uploadBtn.textContent = "Uploading...";
+    
+    
+    uploadBtn.disabled = true;
+
+    
+    uploadBtn.style.opacity = "0.7";
+    uploadBtn.style.cursor = "wait";
+  });
+</script>
 </body>
 </html>
