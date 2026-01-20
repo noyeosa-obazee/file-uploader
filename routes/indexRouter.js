@@ -30,5 +30,6 @@ indexRoute.post("/folder", ctrl.createFolder);
 indexRoute.get("/file/:fileId/download", ctrl.downloadFile);
 indexRoute.post("/file/:fileId/delete", ctrl.deleteFile);
 indexRoute.post("/folder/:folderId/delete", ctrl.deleteFolder);
+indexRoute.get("/log-out", ctrl.logOut);
 
 export default indexRoute;

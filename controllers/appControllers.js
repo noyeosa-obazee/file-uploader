@@ -200,6 +200,15 @@ const deleteFolder = async (req, res) => {
   }
 };
 
+const logOut = async (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.redirect("/log-in");
+  });
+};
 export {
   getSignUpForm,
   signUp,
@@ -212,4 +221,5 @@ export {
   downloadFile,
   deleteFile,
   deleteFolder,
+  logOut,
 };
