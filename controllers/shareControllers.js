@@ -66,13 +66,13 @@ const viewShareLink = async (req, res) => {
   if (shareLink.file) {
     res.render("share/public-file", {
       file: shareLink.file,
-      owner: shareLink.user.username || shareLink.user.email,
+      owner: shareLink.user.email,
     });
   } else if (shareLink.folder) {
     res.render("share/public-folder", {
       folder: shareLink.folder,
       files: shareLink.folder.files,
-      owner: shareLink.user.username || shareLink.user.email,
+      owner: shareLink.user.email,
     });
   }
 };

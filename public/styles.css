@@ -470,3 +470,24 @@ a:hover {
 .copy-btn {
   background-color: #4f46e5;
 }
+
+@media (max-width: 920px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-actions {
+    flex-direction: column;
+  }
+
+  .navbar {
+    flex-direction: column;
+  }
+
+  body.dashboard {
+    margin-top: 20px;
+  }
+}
