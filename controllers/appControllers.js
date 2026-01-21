@@ -41,7 +41,7 @@ const getLogInForm = (req, res) => {
 };
 
 const isAuth = (req, res, next) => {
-  if (req.user.id) {
+  if (req.user && req.user.id) {
     next();
   } else {
     res.redirect("/log-in");
