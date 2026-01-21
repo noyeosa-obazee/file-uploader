@@ -14,9 +14,7 @@
   </head>
   <body>
     <div class="form-container">
-      <h2>
-        Share "<%= item.type === "folder" ? item.name : item.originalName %>"
-      </h2>
+      <h2>Share "<%= type === "folder" ? item.name : item.originalName %>"</h2>
       <br />
       <form action="/share/generate" method="POST">
         <input type="hidden" name="itemId" value="<%= item.id %>" />
