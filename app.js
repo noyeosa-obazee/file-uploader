@@ -38,6 +38,9 @@ app.use(
 
 app.use(passport.session());
 
+app.get("/", (req, res) => {
+  res.redirect("/dashboard");
+});
 app.use("/", indexRoute);
 app.use("/share", shareRoute);
 
